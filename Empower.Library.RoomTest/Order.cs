@@ -32,19 +32,27 @@
             // Key was setup using the dotnet tool Skyline.DataMiner.CICD.Tools.WinEncryptedKeys
             apiKey = Keys.RetrieveKey(keyName);
             name = orderValue;
-            suffix = " from room 'ThisIsABug'";
+            suffix = " from room 'Test'";
         }
 
-        /// <summary>
-        /// Dispatches this job and waits on result.
-        /// REQUIRED - A user secret holding the GUID to log to DataMiner is required.
-        /// Run the commands on every server you want to provide access: 
-        /// dotnet tool install --global Skyline.DataMiner.CICD.Tools.WinEncryptedKeys
-        /// WinEncryptedKeys --name SLC_EXTERNAL_DISPATCHER_KEY --value MYGUID
-        /// </summary>
-        /// <param name="user">The user dispatching the job.</param>
-        /// <returns>True if the dispatch was successful, False if logging failed.</returns>
-        public bool Dispatch(string user)
+		public Order(string orderValue, string roomName)
+		{
+			// Key was setup using the dotnet tool Skyline.DataMiner.CICD.Tools.WinEncryptedKeys
+			apiKey = Keys.RetrieveKey(keyName);
+			name = orderValue;
+			suffix = $" from room '{roomName}'";
+		}
+
+		/// <summary>
+		/// Dispatches this job and waits on result.
+		/// REQUIRED - A user secret holding the GUID to log to DataMiner is required.
+		/// Run the commands on every server you want to provide access: 
+		/// dotnet tool install --global Skyline.DataMiner.CICD.Tools.WinEncryptedKeys
+		/// WinEncryptedKeys --name SLC_EXTERNAL_DISPATCHER_KEY --value MYGUID
+		/// </summary>
+		/// <param name="user">The user dispatching the job.</param>
+		/// <returns>True if the dispatch was successful, False if logging failed.</returns>
+		public bool Dispatch(string user)
         {
             Task<bool> task = DispatchAsync(user);
             return task.WaitAndUnwrapException();
