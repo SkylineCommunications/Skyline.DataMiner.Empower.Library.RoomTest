@@ -32,7 +32,7 @@
             // Key was setup using the dotnet tool Skyline.DataMiner.CICD.Tools.WinEncryptedKeys
             apiKey = Keys.RetrieveKey(keyName);
             name = orderValue;
-            suffix = " from room '0.04'";
+            suffix = " from room '0.04' test";
         }
 
         /// <summary>
